@@ -51,7 +51,9 @@
     {"source":"Steven","target":"Adam","type":"Friend"}
   ]
 
-  
+  var data = d3.json("data.json", function(d){
+    console.long(d.nodes[0]);
+  });
 
   var simulation = d3.forceSimulation()
   .nodes(nodes_data);
