@@ -34,26 +34,31 @@
     {"name":"Nicole","group":"freshman"},
     {"name":"Alex B","group":"SOUL"},
     {"name":"Hannah","group":"SOUL"},
+    {"name":"AP","group":"SOUL"},
     {"name":"Joe","group":"TTau"},
     {"name":"Scott","group":"TTau"},
-    {"name":"AP","group":"SOUL"},
-    {"name":"Adam","group":"home"}
+    {"name":"Adam","group":"home"},
+    {"name":"Haley","group":"home"},
+    {"name":"Amelia","group":"home"},
+
   ];
 
   var links_data = [
     {"source":"Nicole","target":"Alex B","type":"MAP"},
-    {"source":"Steven","target":"Scott","type":"Friend"},
-    {"source":"Steven","target":"Nicole","type":"Friend"},
-    {"source":"Steven","target":"Alex B","type":"Friend"},
-    {"source":"Steven","target":"Hannah","type":"SO"},
-    {"source":"Steven","target":"Joe","type":"Friend"},
-    {"source":"Steven","target":"AP","type":"Friend"},
-    {"source":"Steven","target":"Adam","type":"Friend"}
+    // {"source":"Steven","target":"Scott","type":"Friend"},
+    // {"source":"Steven","target":"Nicole","type":"Friend"},
+    // {"source":"Steven","target":"Alex B","type":"Friend"},
+    // {"source":"Steven","target":"Hannah","type":"SO"},
+    // {"source":"Steven","target":"Joe","type":"Friend"},
+    // {"source":"Steven","target":"AP","type":"Friend"},
+    // {"source":"Steven","target":"Adam","type":"Friend"}
   ]
 
-  var data = d3.json("data.json", function(d){
-    console.long(d.nodes[0]);
-  });
+  // var data = d3.json("https://data.json", function(d){
+  //   console.log(d.nodes_data[0]);
+  // });
+
+  nodes_data.forEach(connectRoot);
 
   var simulation = d3.forceSimulation()
   .nodes(nodes_data);
@@ -78,7 +83,7 @@
   .id(function(d) { return d.name; })
   .distance(150);
 
-  simulation.force("links",link_force);
+  simulation.force("links", link_force);
 
   var link = svg.append("g")
   .attr("class", "links")
@@ -88,7 +93,13 @@
   .attr("stroke-width", 4)
   .style("stroke", linkColor);
 
-  simulation.on("tick", tickActions );
+  function connectRoot(item, index){
+    if(item.name != "Steven"){
+      links_data.push({"source": item.name, "target":"Steven", "type":"Friend"})
+    }
+  }
+
+  simulation.on("tick", tickActions);
 
   function tickActions() {
     //update circle positions to reflect node updates on each tick of the simulation
