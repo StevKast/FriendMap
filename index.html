@@ -1,31 +1,25 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<head>
 <script src="https://d3js.org/d3.v4.min.js"></script>
-<style>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link href="styles.css" rel="stylesheet">
+</head>
 
-.links line {
-  stroke: #999;
-  stroke-opacity: 0.6;
-}
-
-.nodes circle {
-  stroke: #fff;
-  stroke-width: 1.5px;
-}
-
-</style>
 <body>
 
-  <p>
+  <h1>
     Map of Friends
-  </p>
+  </h1>
+
+  <div>
 
   <script>
 
-  var width = 960,
-  height = 500
+  var width = window.screen.width * window.devicePixelRatio * 0.60,
+  height = window.screen.height * window.devicePixelRatio * 0.5
 
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select("div").append("svg")
   .attr("width", width)
   .attr("height", height);
 
@@ -142,7 +136,7 @@
     if(d.group == "SOUL"){
       return "red";
     } else if (d.group == "TTau") {
-      return "yellow";
+      return "gold";
     }else if (d.group == 0) {
       return "black";
     }else {
@@ -160,5 +154,8 @@
     }
   }
 
-
 </script>
+
+</div>
+
+</body>
